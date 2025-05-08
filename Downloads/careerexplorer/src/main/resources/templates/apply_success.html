@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Submitted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 40px;
+            text-align: center;
+        }
+        .success-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .score {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+        .back-button {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0d47a1;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .back-button:hover {
+            background-color: #08306b;
+        }
+    </style>
+</head>
+<body>
+<div class="success-box">
+    <h1>🎉 Thank you for applying!</h1>
+    <p>We’ve received your application for <strong th:text="${job.title}">the job</strong>.</p>
+
+    <div class="score" th:if="${score != null}">
+        Match Score: <span th:text="${score}">0</span>%
+    </div>
+
+    <a href="/jobs-page" class="back-button">🔙 Back to Job Board</a>
+</div>
+</body>
+</html>

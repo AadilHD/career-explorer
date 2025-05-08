@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RBC Jobs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        header {
+            background-color: #0d47a1;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #08306b;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .job-card h3 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .skills {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Career Explorer</h1>
+    <p>Browse available RBC tech jobs and apply instantly</p>
+</header>
+
+<div class="container">
+    <h2>Available RBC Jobs</h2>
+
+    <form method="get" action="/jobs-page">
+        <input type="text" name="keyword" placeholder="Search by job title"
+               th:value="${keyword}">
+        <button type="submit">Search</button>
+    </form>
+    <div th:each="job : ${jobs}" class="job-card">
+        <h3 th:text="${job.title}"></h3>
+        <p><strong>Location:</strong> <span th:text="${job.location}"></span></p>
+
+        <!-- ✅ Job Description -->
+        <p><strong>Description:</strong> <span th:text="${job.description}"></span></p>
+
+        <p class="skills">Skills: <span th:text="${#strings.arrayJoin(job.skills, ', ')}"></span></p>
+
+        <a th:href="@{'/apply/' + ${job.id}}">
+            <button>Apply Now</button>
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply Now</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 18px;
+            background-color: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #08306b;
+        }
+
+        .divider {
+            margin: 40px 0 20px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Apply to <span th:text="${job.title}">Job Title</span></h2>
+
+    <!-- Application Form -->
+    <form th:action="@{/apply}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="jobId" th:value="${job.id}" />
+        <label>Name:</label>
+        <input type="text" name="applicantName" required><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label>Resume (PDF only):</label>
+        <input type="file" name="resumeFile" accept="application/pdf" required><br><br>
+
+        <button type="submit">Apply Now</button>
+    </form>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Resume Score Form -->
+    <h2>Check Resume Match Score</h2>
+    <form th:action="@{/recommend}" method="post">
+        <input type="hidden" name="jobId" th:value="${job.id}" />
+        <label for="resumeText">Paste Resume Text:</label>
+        <textarea id="resumeText" name="resumeText" rows="10"></textarea>
+
+        <button type="submit">Get Match Score</button>
+    </form>
+
+    <div th:if="${score}">
+        <p style="margin-top:20px;"><strong>Match Score:</strong> <span th:text="${score}">0</span>%</p>
+    </div>
+</div>
+</body>
+</html>
