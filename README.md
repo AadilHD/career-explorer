@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="A_flat-style_logo_for_Career_Explorer.png" alt="Career Explorer Logo" width="200"/>
+</p>
+
 # 💼 Career Explorer
 
 Career Explorer is a full-stack web application that allows users to browse tech jobs and apply with their resume. It includes an AI-based resume scoring feature powered by Python and Flask to help applicants assess how well their resume matches a job description.
